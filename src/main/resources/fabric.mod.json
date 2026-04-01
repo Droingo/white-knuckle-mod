@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "whiteknuckle",
+	"version": "${version}",
+	"name": "White Knuckle",
+	"description": "You should check out the actual game! This is a modpack for Droingo's White Knuckle Event!",
+	"authors": [
+		"Droingo"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Droingo/white-knuckle-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/whiteknuckle/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.droingo.whiteknuckle.WhiteKnuckle"
+		],
+		"fabric-datagen": [
+			"net.droingo.whiteknuckle.WhiteKnuckleDataGenerator"
+		],
+      "client": [
+        "net.droingo.whiteknuckle.WhiteKnuckleClient"
+      ]
+	},
+	"mixins": [
+		"whiteknuckle.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.18.5",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
