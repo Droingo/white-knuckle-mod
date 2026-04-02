@@ -1,5 +1,6 @@
 package net.droingo.whiteknuckle;
 
+import net.droingo.whiteknuckle.block.ModBlocks;
 import net.droingo.whiteknuckle.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -14,5 +15,6 @@ public class WhiteKnuckle implements ModInitializer {
 	@Override
 	public void onInitialize() {
         ModItems.registerModItems();
+        ModBlocks.registerModBlocks();
 	}
 }

@@ -1,0 +1,35 @@
+{
+  "variants": {
+    "facing=up,hits=0":    { "model": "whiteknuckle:block/piton" },
+    "facing=down,hits=0":  { "model": "whiteknuckle:block/piton", "x": 180 },
+
+    "facing=north,hits=0": { "model": "whiteknuckle:block/piton", "x": 90 },
+    "facing=south,hits=0": { "model": "whiteknuckle:block/piton", "x": 270 },
+    "facing=west,hits=0":  { "model": "whiteknuckle:block/piton", "x": 90, "y": 270 },
+    "facing=east,hits=0":  { "model": "whiteknuckle:block/piton", "x": 90, "y": 90 },
+
+    "facing=up,hits=1":    { "model": "whiteknuckle:block/piton_1" },
+    "facing=down,hits=1":  { "model": "whiteknuckle:block/piton_1", "x": 180 },
+
+    "facing=north,hits=1": { "model": "whiteknuckle:block/piton_1", "x": 90 },
+    "facing=south,hits=1": { "model": "whiteknuckle:block/piton_1", "x": 270 },
+    "facing=west,hits=1":  { "model": "whiteknuckle:block/piton_1", "x": 90, "y": 270 },
+    "facing=east,hits=1":  { "model": "whiteknuckle:block/piton_1", "x": 90, "y": 90 },
+
+    "facing=up,hits=2":    { "model": "whiteknuckle:block/piton_2" },
+    "facing=down,hits=2":  { "model": "whiteknuckle:block/piton_2", "x": 180 },
+
+    "facing=north,hits=2": { "model": "whiteknuckle:block/piton_2", "x": 90 },
+    "facing=south,hits=2": { "model": "whiteknuckle:block/piton_2", "x": 270 },
+    "facing=west,hits=2":  { "model": "whiteknuckle:block/piton_2", "x": 90, "y": 270 },
+    "facing=east,hits=2":  { "model": "whiteknuckle:block/piton_2", "x": 90, "y": 90 },
+
+    "facing=up,hits=3":    { "model": "whiteknuckle:block/piton_3" },
+    "facing=down,hits=3":  { "model": "whiteknuckle:block/piton_3", "x": 180 },
+
+    "facing=north,hits=3": { "model": "whiteknuckle:block/piton_3", "x": 90 },
+    "facing=south,hits=3": { "model": "whiteknuckle:block/piton_3", "x": 270 },
+    "facing=west,hits=3":  { "model": "whiteknuckle:block/piton_3", "x": 90, "y": 270 },
+    "facing=east,hits=3":  { "model": "whiteknuckle:block/piton_3", "x": 90, "y": 90 }
+  }
+}
