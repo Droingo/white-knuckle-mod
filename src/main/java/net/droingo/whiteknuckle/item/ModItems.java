@@ -9,7 +9,9 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.droingo.whiteknuckle.item.custom.RebarItem;
 import net.droingo.whiteknuckle.item.custom.HammerItem;
+
 
 public class ModItems {
     public static final Item GOLDEN_ROACH = registerItem("golden_roach",
@@ -21,6 +23,12 @@ public class ModItems {
     public static final Item HAMMER = registerItem("hammer",
             new HammerItem(new Item.Settings().registryKey(
                     RegistryKey.of(RegistryKeys.ITEM, Identifier.of(WhiteKnuckle.MOD_ID, "hammer"))
+            ))
+    );
+
+    public static final Item REBAR = registerItem("rebar",
+            new RebarItem(new Item.Settings().registryKey(
+                    RegistryKey.of(RegistryKeys.ITEM, Identifier.of(WhiteKnuckle.MOD_ID, "rebar"))
             ))
     );
 
@@ -37,6 +45,7 @@ public class ModItems {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(HAMMER);
+            entries.add(REBAR);
         });
     }
 }
