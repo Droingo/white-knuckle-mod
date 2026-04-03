@@ -2,6 +2,7 @@ package net.droingo.whiteknuckle.block;
 
 import net.droingo.whiteknuckle.WhiteKnuckle;
 import net.droingo.whiteknuckle.block.custom.PitonBlock;
+import net.droingo.whiteknuckle.block.custom.RebarBlock;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -16,12 +17,20 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 
 public class ModBlocks {
-    public static final Block PITON = registerBlock("piton",
+    public static final Block PITON = registerBlockWithItem("piton",
             new PitonBlock(AbstractBlock.Settings.copy(Blocks.IRON_BARS)
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "piton")))
                     .nonOpaque()));
 
-    private static Block registerBlock(String name, Block block) {
+    public static final Block REBAR = registerBlockWithoutItem("rebar",
+            new RebarBlock(AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "rebar")))
+                    .noCollision()
+                    .nonOpaque()
+                    .strength(0.5f)
+            ));
+
+    private static Block registerBlockWithItem(String name, Block block) {
         Identifier id = Identifier.of(WhiteKnuckle.MOD_ID, name);
 
         Registry.register(Registries.BLOCK, id, block);
@@ -31,6 +40,11 @@ public class ModBlocks {
                 )));
 
         return block;
+    }
+
+    private static Block registerBlockWithoutItem(String name, Block block) {
+        Identifier id = Identifier.of(WhiteKnuckle.MOD_ID, name);
+        return Registry.register(Registries.BLOCK, id, block);
     }
 
     public static void registerModBlocks() {

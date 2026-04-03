@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "facing=up":    { "model": "whiteknuckle:block/rebar" },
+    "facing=down":  { "model": "whiteknuckle:block/rebar", "x": 180 },
+
+    "facing=north": { "model": "whiteknuckle:block/rebar", "x": 90 },
+    "facing=south": { "model": "whiteknuckle:block/rebar", "x": 270 },
+    "facing=west":  { "model": "whiteknuckle:block/rebar", "x": 90, "y": 270 },
+    "facing=east":  { "model": "whiteknuckle:block/rebar", "x": 90, "y": 90 }
+  }
+}
