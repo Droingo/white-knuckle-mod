@@ -15,6 +15,8 @@ import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
+import net.droingo.whiteknuckle.block.custom.RisingThreatBlock;
+import net.droingo.whiteknuckle.block.custom.RisingThreatSourceBlock;
 
 public class ModBlocks {
     public static final Block PITON = registerBlockWithItem("piton",
@@ -28,6 +30,20 @@ public class ModBlocks {
                     .noCollision()
                     .nonOpaque()
                     .strength(0.5f)
+            ));
+
+    public static final Block RISING_THREAT = registerBlockWithoutItem("rising_threat",
+            new RisingThreatBlock(AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "rising_threat")))
+                    .nonOpaque()
+                    .strength(1.0f)
+                    .velocityMultiplier(0.2f)
+            ));
+
+    public static final Block RISING_THREAT_SOURCE = registerBlockWithItem("rising_threat_source",
+            new RisingThreatSourceBlock(AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "rising_threat_source")))
+                    .strength(1.0f)
             ));
 
     private static Block registerBlockWithItem(String name, Block block) {
@@ -52,6 +68,7 @@ public class ModBlocks {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(PITON);
+            entries.add(RISING_THREAT_SOURCE);
         });
     }
 }
