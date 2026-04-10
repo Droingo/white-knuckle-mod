@@ -19,7 +19,7 @@ import net.droingo.whiteknuckle.block.custom.RisingThreatBlock;
 import net.droingo.whiteknuckle.block.custom.RisingThreatSourceBlock;
 
 public class ModBlocks {
-    public static final Block PITON = registerBlockWithItem("piton",
+    public static final Block PITON = registerBlockWithoutItem("piton",
             new PitonBlock(AbstractBlock.Settings.copy(Blocks.IRON_BARS)
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "piton")))
                     .nonOpaque()));
@@ -67,7 +67,6 @@ public class ModBlocks {
         WhiteKnuckle.LOGGER.info("Registering Mod Blocks for " + WhiteKnuckle.MOD_ID);
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
-            entries.add(PITON);
             entries.add(RISING_THREAT_SOURCE);
         });
     }

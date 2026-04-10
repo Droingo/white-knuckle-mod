@@ -6,6 +6,7 @@ import net.minecraft.util.math.BlockPos;
 
 public class RisingThreatSourceBlockEntity extends BlockEntity {
     private int tickCounter = 0;
+    private int currentLayer = 1;
 
     public RisingThreatSourceBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.RISING_THREAT_SOURCE_BE, pos, state);
@@ -15,15 +16,20 @@ public class RisingThreatSourceBlockEntity extends BlockEntity {
         return tickCounter;
     }
 
-    public void setTickCounter(int tickCounter) {
-        this.tickCounter = tickCounter;
-    }
-
     public void incrementTickCounter() {
         this.tickCounter++;
     }
 
     public void resetTickCounter() {
         this.tickCounter = 0;
+    }
+
+    public int getCurrentLayer() {
+        return currentLayer;
+    }
+
+    public void advanceLayer() {
+        this.currentLayer++;
+        markDirty();
     }
 }

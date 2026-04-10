@@ -1,6 +1,7 @@
 package net.droingo.whiteknuckle.item;
 
 import net.droingo.whiteknuckle.WhiteKnuckle;
+import net.droingo.whiteknuckle.item.custom.PitonItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
@@ -32,6 +33,12 @@ public class ModItems {
             ))
     );
 
+    public static final Item PITON = registerItem("piton",
+            new PitonItem(new Item.Settings().registryKey(
+                    RegistryKey.of(RegistryKeys.ITEM, Identifier.of(WhiteKnuckle.MOD_ID, "piton"))
+            ))
+    );
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(WhiteKnuckle.MOD_ID, name), item);
     }
@@ -46,6 +53,7 @@ public class ModItems {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(HAMMER);
             entries.add(REBAR);
+            entries.add(PITON);
         });
     }
 }

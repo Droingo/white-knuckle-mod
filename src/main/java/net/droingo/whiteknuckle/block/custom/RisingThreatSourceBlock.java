@@ -37,7 +37,7 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
 
     @Override
     protected void onStateReplaced(BlockState state, ServerWorld world, BlockPos pos, boolean moved) {
-        int radius = 7;
+        int radius = 8;
         int maxHeight = world.getTopYInclusive();
 
         for (int y = pos.getY() + 1; y <= maxHeight; y++) {
@@ -66,54 +66,15 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
 
             sourceBe.incrementTickCounter();
 
-            if (sourceBe.getTickCounter() >= 40) { // THIS CHANGES THE SPEED
+            int riseDelay = 58 + w.random.nextInt(5);
+
+            if (sourceBe.getTickCounter() >= riseDelay) {
                 sourceBe.resetTickCounter();
 
+                int radius = 8;
+                BlockPos center = new BlockPos(p.getX(), p.getY() + sourceBe.getCurrentLayer(), p.getZ());
 
-
-                int radius = 7;
-
-                int currentTopY = p.getY() + 1;
-                while (w.getBlockState(new BlockPos(p.getX(), currentTopY, p.getZ())).isOf(net.droingo.whiteknuckle.block.ModBlocks.RISING_THREAT)) {
-                    currentTopY++;
-                }
-
-
-
-                BlockPos center = new BlockPos(p.getX(), currentTopY, p.getZ());
-
-                // 🔊 SOUND AT THE TOP (this is important)
-                w.playSound(
-                        null,
-                        center,
-                        SoundEvents.BLOCK_LAVA_EXTINGUISH,
-                        SoundCategory.BLOCKS,
-                        0.2f,
-                        0.8f + w.random.nextFloat() * 0.3f
-                );
-
-                w.playSound(
-                        null,
-                        center,
-                        SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP,
-                        SoundCategory.BLOCKS,
-                        0.6f,
-                        1.0f + w.random.nextFloat() * 0.5f
-                );
-
-
-                if (w instanceof net.minecraft.server.world.ServerWorld serverWorld) {
-                    serverWorld.spawnParticles(
-                            net.minecraft.particle.ParticleTypes.SOUL,
-                            center.getX() + 0.5,
-                            center.getY() + 1,
-                            center.getZ() + 0.5,
-                            35,
-                            3.5, 0.2, 3.5,
-                            0.01
-                    );
-                }
-
+                // stopper check on the next layer
                 boolean touchedStopper = false;
 
                 for (int x = -radius; x <= radius; x++) {
@@ -136,17 +97,51 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
                     return;
                 }
 
+                // sound at the active rising layer
+                w.playSound(
+                        null,
+                        center,
+                        net.minecraft.sound.SoundEvents.BLOCK_LAVA_EXTINGUISH,
+                        net.minecraft.sound.SoundCategory.BLOCKS,
+                        0.7f,
+                        0.8f + w.random.nextFloat() * 0.3f
+                );
+
+                w.playSound(
+                        null,
+                        center,
+                        net.minecraft.sound.SoundEvents.BLOCK_BUBBLE_COLUMN_BUBBLE_POP,
+                        net.minecraft.sound.SoundCategory.BLOCKS,
+                        0.4f,
+                        1.0f + w.random.nextFloat() * 0.5f
+                );
+
+                if (w instanceof net.minecraft.server.world.ServerWorld serverWorld) {
+                    serverWorld.spawnParticles(
+                            net.minecraft.particle.ParticleTypes.SOUL,
+                            center.getX() + 0.5,
+                            center.getY() + 0.7,
+                            center.getZ() + 0.5,
+                            35,
+                            3.5, 0.2, 3.5,
+                            0.01
+                    );
+                }
+
+                // place only into air, but ALWAYS advance the layer
                 for (int x = -radius; x <= radius; x++) {
                     for (int z = -radius; z <= radius; z++) {
                         if (x * x + z * z <= radius * radius) {
                             BlockPos placePos = center.add(x, 0, z);
 
                             if (w.getBlockState(placePos).isAir()) {
-                                w.setBlockState(placePos, net.droingo.whiteknuckle.block.ModBlocks.RISING_THREAT.getDefaultState());
+                                w.setBlockState(placePos, ModBlocks.RISING_THREAT.getDefaultState());
                             }
                         }
                     }
                 }
+
+                sourceBe.advanceLayer();
             }
         } : null;
     }

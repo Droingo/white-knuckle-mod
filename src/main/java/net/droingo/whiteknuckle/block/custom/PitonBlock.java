@@ -1,21 +1,28 @@
 package net.droingo.whiteknuckle.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.droingo.whiteknuckle.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.ShapeContext;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.EnumProperty;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.minecraft.world.tick.ScheduledTickView;
 
@@ -120,6 +127,34 @@ public class PitonBlock extends Block {
                 default -> Block.createCuboidShape(6.5, 12.0, 6.5, 9.5, 16.0, 9.5);
             };
         };
+    }
+
+    @Override
+    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
+        if (state.get(HITS) >= 3) {
+            return ActionResult.PASS;
+        }
+        // only removable with empty hand
+        if (!player.getMainHandStack().isEmpty()) {
+            return ActionResult.PASS;
+        }
+
+        if (!world.isClient()) {
+            world.setBlockState(pos, Blocks.AIR.getDefaultState());
+
+            if (!player.isCreative()) {
+                ItemEntity drop = new ItemEntity(
+                        world,
+                        pos.getX() + 0.5,
+                        pos.getY() + 0.5,
+                        pos.getZ() + 0.5,
+                        new ItemStack(ModItems.PITON)
+                );
+                world.spawnEntity(drop);
+            }
+        }
+
+        return ActionResult.SUCCESS;
     }
 
     @Override
