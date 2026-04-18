@@ -17,6 +17,7 @@ import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.droingo.whiteknuckle.block.custom.RisingThreatBlock;
 import net.droingo.whiteknuckle.block.custom.RisingThreatSourceBlock;
+import net.droingo.whiteknuckle.block.custom.SteamVentBlock;
 
 public class ModBlocks {
     public static final Block PITON = registerBlockWithoutItem("piton",
@@ -46,6 +47,15 @@ public class ModBlocks {
                     .strength(1.0f)
             ));
 
+    public static final Block STEAM_VENT = registerBlockWithItem("steam_vent",
+            new SteamVentBlock(AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "steam_vent")))
+                    .strength(1.0f)
+                    .nonOpaque()
+            ));
+
+
+
     private static Block registerBlockWithItem(String name, Block block) {
         Identifier id = Identifier.of(WhiteKnuckle.MOD_ID, name);
 
@@ -68,6 +78,7 @@ public class ModBlocks {
 
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(RISING_THREAT_SOURCE);
+            entries.add(STEAM_VENT);
         });
     }
 }

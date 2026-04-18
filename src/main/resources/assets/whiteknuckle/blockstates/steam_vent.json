@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north,active=false": { "model": "whiteknuckle:block/steam_vent" },
+    "facing=south,active=false": { "model": "whiteknuckle:block/steam_vent", "y": 180 },
+    "facing=west,active=false":  { "model": "whiteknuckle:block/steam_vent", "y": 270 },
+    "facing=east,active=false":  { "model": "whiteknuckle:block/steam_vent", "y": 90 },
+
+    "facing=up,active=false":    { "model": "whiteknuckle:block/steam_vent", "x": 270 },
+    "facing=down,active=false":  { "model": "whiteknuckle:block/steam_vent", "x": 90 },
+
+    "facing=north,active=true":  { "model": "whiteknuckle:block/steam_vent" },
+    "facing=south,active=true":  { "model": "whiteknuckle:block/steam_vent", "y": 180 },
+    "facing=west,active=true":   { "model": "whiteknuckle:block/steam_vent", "y": 270 },
+    "facing=east,active=true":   { "model": "whiteknuckle:block/steam_vent", "y": 90 },
+
+    "facing=up,active=true":     { "model": "whiteknuckle:block/steam_vent", "x": 270 },
+    "facing=down,active=true":   { "model": "whiteknuckle:block/steam_vent", "x": 90 }
+  }
+}

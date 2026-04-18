@@ -19,6 +19,7 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.RaycastContext;
 import net.minecraft.world.World;
+import net.droingo.whiteknuckle.block.custom.SteamVentBlock;
 
 public class PitonItem extends Item {
     public PitonItem(Settings settings) {
@@ -71,6 +72,11 @@ public class PitonItem extends Item {
 
     private ActionResult placePiton(World world, PlayerEntity player, BlockPos clickedPos, Direction side, ItemStack stack) {
         BlockPos placePos = clickedPos.offset(side);
+        BlockState clickedState = world.getBlockState(clickedPos);
+
+        if (clickedState.getBlock() instanceof SteamVentBlock) {
+            return ActionResult.PASS;
+        }
 
         if (!world.getBlockState(placePos).isAir()) {
             return ActionResult.PASS;

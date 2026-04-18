@@ -17,6 +17,8 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraft.entity.decoration.ItemFrameEntity;
+import net.minecraft.util.math.Box;
 
 public class RisingThreatSourceBlock extends BlockWithEntity {
     public static final MapCodec<RisingThreatSourceBlock> CODEC = createCodec(RisingThreatSourceBlock::new);
@@ -66,7 +68,7 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
 
             sourceBe.incrementTickCounter();
 
-            int riseDelay = 58 + w.random.nextInt(5);
+            int riseDelay = 68 + w.random.nextInt(5);
 
             if (sourceBe.getTickCounter() >= riseDelay) {
                 sourceBe.resetTickCounter();
@@ -134,7 +136,13 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
                         if (x * x + z * z <= radius * radius) {
                             BlockPos placePos = center.add(x, 0, z);
 
-                            if (w.getBlockState(placePos).isAir()) {
+                            boolean hasItemFrame = !w.getEntitiesByClass(
+                                    ItemFrameEntity.class,
+                                    new Box(placePos),
+                                    entity -> true
+                            ).isEmpty();
+
+                            if (w.getBlockState(placePos).isAir() && !hasItemFrame) {
                                 w.setBlockState(placePos, ModBlocks.RISING_THREAT.getDefaultState());
                             }
                         }

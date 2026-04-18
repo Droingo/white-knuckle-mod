@@ -19,6 +19,16 @@ public class ModBlockEntities {
                     ).build()
             );
 
+    public static final BlockEntityType<SteamVentBlockEntity> STEAM_VENT_BE =
+            Registry.register(
+                    Registries.BLOCK_ENTITY_TYPE,
+                    Identifier.of(WhiteKnuckle.MOD_ID, "steam_vent"),
+                    FabricBlockEntityTypeBuilder.create(
+                            SteamVentBlockEntity::new,
+                            ModBlocks.STEAM_VENT
+                    ).build()
+            );
+
     public static void registerModBlockEntities() {
         WhiteKnuckle.LOGGER.info("Registering Mod Block Entities for " + WhiteKnuckle.MOD_ID);
     }
