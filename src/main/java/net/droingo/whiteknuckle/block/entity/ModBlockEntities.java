@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityT
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.droingo.whiteknuckle.block.entity.GoldenRoachPickupBlockEntity;
 import net.minecraft.util.Identifier;
 
 public class ModBlockEntities {
@@ -18,6 +19,12 @@ public class ModBlockEntities {
                             ModBlocks.RISING_THREAT_SOURCE
                     ).build()
             );
+
+    public static final BlockEntityType<GoldenRoachPickupBlockEntity> GOLDEN_ROACH_PICKUP_BE =
+            Registry.register(Registries.BLOCK_ENTITY_TYPE,
+                    Identifier.of(WhiteKnuckle.MOD_ID, "golden_roach_pickup_be"),
+                    FabricBlockEntityTypeBuilder.create(GoldenRoachPickupBlockEntity::new,
+                            ModBlocks.GOLDEN_ROACH_PICKUP).build());
 
     public static final BlockEntityType<SteamVentBlockEntity> STEAM_VENT_BE =
             Registry.register(

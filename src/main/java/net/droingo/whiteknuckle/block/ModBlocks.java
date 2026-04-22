@@ -18,12 +18,20 @@ import net.minecraft.util.Identifier;
 import net.droingo.whiteknuckle.block.custom.RisingThreatBlock;
 import net.droingo.whiteknuckle.block.custom.RisingThreatSourceBlock;
 import net.droingo.whiteknuckle.block.custom.SteamVentBlock;
+import net.droingo.whiteknuckle.block.custom.GoldenRoachPickupBlock;
 
 public class ModBlocks {
     public static final Block PITON = registerBlockWithoutItem("piton",
             new PitonBlock(AbstractBlock.Settings.copy(Blocks.IRON_BARS)
                     .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "piton")))
                     .nonOpaque()));
+
+    public static final Block GOLDEN_ROACH_PICKUP = registerBlockWithItem("golden_roach_pickup",
+            new GoldenRoachPickupBlock(AbstractBlock.Settings.create()
+                    .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(WhiteKnuckle.MOD_ID, "golden_roach_pickup")))
+                    .strength(0.2f)
+                    .nonOpaque()
+                    .noCollision()));
 
     public static final Block REBAR = registerBlockWithoutItem("rebar",
             new RebarBlock(AbstractBlock.Settings.create()
@@ -79,6 +87,7 @@ public class ModBlocks {
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(entries -> {
             entries.add(RISING_THREAT_SOURCE);
             entries.add(STEAM_VENT);
+            entries.add(GOLDEN_ROACH_PICKUP);
         });
     }
 }
