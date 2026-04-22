@@ -1,33 +1,33 @@
 {
   "variants": {
-    "available=true,face=floor,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup" },
-    "available=true,face=floor,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 180 },
-    "available=true,face=floor,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 270 },
-    "available=true,face=floor,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 90 },
+    "enabled=true,face=floor,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup" },
+    "enabled=true,face=floor,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 180 },
+    "enabled=true,face=floor,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 270 },
+    "enabled=true,face=floor,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 90 },
 
-    "available=true,face=ceiling,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180 },
-    "available=true,face=ceiling,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 180 },
-    "available=true,face=ceiling,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 270 },
-    "available=true,face=ceiling,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 90 },
+    "enabled=true,face=ceiling,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180 },
+    "enabled=true,face=ceiling,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 180 },
+    "enabled=true,face=ceiling,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 270 },
+    "enabled=true,face=ceiling,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 90 },
 
-    "available=true,face=wall,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90 },
-    "available=true,face=wall,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 180 },
-    "available=true,face=wall,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 270 },
-    "available=true,face=wall,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 90 },
+    "enabled=true,face=wall,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90 },
+    "enabled=true,face=wall,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 180 },
+    "enabled=true,face=wall,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 270 },
+    "enabled=true,face=wall,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 90 },
 
-    "available=false,face=floor,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 0 },
-    "available=false,face=floor,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 180 },
-    "available=false,face=floor,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 270 },
-    "available=false,face=floor,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "y": 90 },
+    "enabled=false,face=floor,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "y": 0 },
+    "enabled=false,face=floor,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "y": 180 },
+    "enabled=false,face=floor,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "y": 270 },
+    "enabled=false,face=floor,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "y": 90 },
 
-    "available=false,face=ceiling,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180 },
-    "available=false,face=ceiling,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 180 },
-    "available=false,face=ceiling,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 270 },
-    "available=false,face=ceiling,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 180, "y": 90 },
+    "enabled=false,face=ceiling,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 180 },
+    "enabled=false,face=ceiling,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 180, "y": 180 },
+    "enabled=false,face=ceiling,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 180, "y": 270 },
+    "enabled=false,face=ceiling,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 180, "y": 90 },
 
-    "available=false,face=wall,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90 },
-    "available=false,face=wall,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 180 },
-    "available=false,face=wall,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 270 },
-    "available=false,face=wall,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup", "x": 90, "y": 90 }
+    "enabled=false,face=wall,facing=north": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 90 },
+    "enabled=false,face=wall,facing=south": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 90, "y": 180 },
+    "enabled=false,face=wall,facing=west": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 90, "y": 270 },
+    "enabled=false,face=wall,facing=east": { "model": "whiteknuckle:block/golden_roach_pickup_hidden", "x": 90, "y": 90 }
   }
 }

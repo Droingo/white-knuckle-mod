@@ -68,7 +68,7 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
 
             sourceBe.incrementTickCounter();
 
-            int riseDelay = 68 + w.random.nextInt(5);
+            int riseDelay = 80 + w.random.nextInt(5);
 
             int radius = 8;
             BlockPos center = new BlockPos(p.getX(), p.getY() + sourceBe.getCurrentLayer(), p.getZ());
@@ -120,7 +120,7 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
             boolean shouldPause = playerTooClose || sourceBe.isLinkedPause();
 
             if (shouldPause && !sourceBe.isPauseUsed()) {
-                if (sourceBe.getPausedTicks() < 600) {
+                if (sourceBe.getPausedTicks() < 300) {
                     sourceBe.incrementPausedTicks();
                     sourceBe.resetTickCounter();
                     return;

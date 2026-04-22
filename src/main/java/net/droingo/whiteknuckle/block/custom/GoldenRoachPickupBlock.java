@@ -28,6 +28,8 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 
 public class GoldenRoachPickupBlock extends BlockWithEntity {
     public static final MapCodec<GoldenRoachPickupBlock> CODEC = createCodec(GoldenRoachPickupBlock::new);
@@ -36,7 +38,12 @@ public class GoldenRoachPickupBlock extends BlockWithEntity {
     public static final EnumProperty<BlockFace> FACE = Properties.BLOCK_FACE;
     public static final EnumProperty<Direction> FACING = Properties.HORIZONTAL_FACING;
 
-    private static final VoxelShape ROACH_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 4, 11);
+    private static final VoxelShape FLOOR_SHAPE = Block.createCuboidShape(5, 0, 5, 11, 2, 11);
+    private static final VoxelShape CEILING_SHAPE = Block.createCuboidShape(5, 14, 5, 11, 16, 11);
+    private static final VoxelShape WALL_NORTH_SHAPE = Block.createCuboidShape(5, 5, 14, 11, 11, 16);
+    private static final VoxelShape WALL_SOUTH_SHAPE = Block.createCuboidShape(5, 5, 0, 11, 11, 2);
+    private static final VoxelShape WALL_EAST_SHAPE = Block.createCuboidShape(0, 5, 5, 2, 11, 11);
+    private static final VoxelShape WALL_WEST_SHAPE = Block.createCuboidShape(14, 5, 5, 16, 11, 11);
 
     public GoldenRoachPickupBlock(Settings settings) {
         super(settings);
@@ -60,17 +67,14 @@ public class GoldenRoachPickupBlock extends BlockWithEntity {
     public BlockState getPlacementState(ItemPlacementContext ctx) {
         Direction side = ctx.getSide();
         BlockFace face;
-        Direction facing;
+        Direction facing = Direction.Type.HORIZONTAL.random(ctx.getWorld().random);
 
         if (side == Direction.UP) {
             face = BlockFace.FLOOR;
-            facing = ctx.getHorizontalPlayerFacing().getOpposite();
         } else if (side == Direction.DOWN) {
             face = BlockFace.CEILING;
-            facing = ctx.getHorizontalPlayerFacing().getOpposite();
         } else {
             face = BlockFace.WALL;
-            facing = side;
         }
 
         return this.getDefaultState()
@@ -107,7 +111,24 @@ public class GoldenRoachPickupBlock extends BlockWithEntity {
 
     @Override
     protected VoxelShape getOutlineShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context) {
-        return state.get(AVAILABLE) ? ROACH_SHAPE : VoxelShapes.empty();
+        if (!state.get(AVAILABLE)) {
+            return VoxelShapes.empty();
+        }
+
+        return switch (state.get(FACE)) {
+            case FLOOR -> FLOOR_SHAPE;
+            case CEILING -> CEILING_SHAPE;
+            case WALL -> {
+                Direction facing = state.get(FACING);
+                yield switch (facing) {
+                    case NORTH -> WALL_NORTH_SHAPE;
+                    case SOUTH -> WALL_SOUTH_SHAPE;
+                    case EAST -> WALL_EAST_SHAPE;
+                    case WEST -> WALL_WEST_SHAPE;
+                    default -> VoxelShapes.empty();
+                };
+            }
+        };
     }
 
     @Override
@@ -132,6 +153,14 @@ public class GoldenRoachPickupBlock extends BlockWithEntity {
             }
 
             player.giveItemStack(new ItemStack(ModItems.GOLDEN_ROACH));
+            world.playSound(
+                    null,
+                    pos,
+                    SoundEvents.ENTITY_ITEM_PICKUP,
+                    SoundCategory.BLOCKS,
+                    0.5f,
+                    1.4f
+            );
             roachBe.setAvailable(false);
             roachBe.setRespawnTicks(6000);
 

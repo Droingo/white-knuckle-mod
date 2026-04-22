@@ -2,9 +2,12 @@ package net.droingo.whiteknuckle.block.entity;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
+import net.minecraft.particle.DustParticleEffect;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.droingo.whiteknuckle.block.custom.GoldenRoachPickupBlock;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
 
 public class GoldenRoachPickupBlockEntity extends BlockEntity {
     private boolean available = true;
@@ -42,6 +45,20 @@ public class GoldenRoachPickupBlockEntity extends BlockEntity {
     public static void tick(World world, BlockPos pos, BlockState state, GoldenRoachPickupBlockEntity blockEntity) {
         if (world.isClient()) {
             return;
+        }
+
+        if (blockEntity.isAvailable() && world.random.nextInt(8) == 0) {
+            ((ServerWorld) world).spawnParticles(
+                    new DustParticleEffect(0xFFD84A, 0.6f),
+                    pos.getX() + 0.5,
+                    pos.getY() + 0.2,
+                    pos.getZ() + 0.5,
+                    1,
+                    0.12,
+                    0.04,
+                    0.12,
+                    0.0
+            );
         }
 
         if (!blockEntity.isAvailable() && blockEntity.getRespawnTicks() > 0) {
