@@ -52,6 +52,7 @@ public class RebarItem extends Item {
             if (!world.isClient()) {
                 if (world.getBlockState(hitResult.getBlockPos()).getBlock() instanceof net.droingo.whiteknuckle.block.custom.PitonBlock) {
                     return ActionResult.PASS;
+
                 }
                 
                 float throwPitch = 0.9f + world.random.nextFloat() * 0.2f;

@@ -70,11 +70,80 @@ public class RisingThreatSourceBlock extends BlockWithEntity {
 
             int riseDelay = 68 + w.random.nextInt(5);
 
+            int radius = 8;
+            BlockPos center = new BlockPos(p.getX(), p.getY() + sourceBe.getCurrentLayer(), p.getZ());
+
+            boolean playerTooClose = false;
+
+            for (PlayerEntity player : w.getPlayers()) {
+                BlockPos playerPos = player.getBlockPos();
+
+                int dx = playerPos.getX() - center.getX();
+                int dz = playerPos.getZ() - center.getZ();
+                boolean insideCone = (dx * dx + dz * dz) <= (radius * radius);
+
+                int verticalGap = playerPos.getY() - center.getY();
+
+                if (insideCone && verticalGap >= 0 && verticalGap <= 25) {
+                    playerTooClose = true;
+                    break;
+                }
+            }
+
+            sourceBe.setPlayerTooClose(playerTooClose);
+
+            boolean linkedPause = false;
+
+            for (int x = p.getX() - 80; x <= p.getX() + 80; x++) {
+                for (int z = p.getZ() - 80; z <= p.getZ() + 80; z++) {
+                    BlockPos nearbyPos = new BlockPos(x, p.getY(), z);
+
+                    if (nearbyPos.equals(p)) {
+                        continue;
+                    }
+
+                    if (w.getBlockEntity(nearbyPos) instanceof RisingThreatSourceBlockEntity nearbySourceBe) {
+                        if (nearbySourceBe.isPlayerTooClose()) {
+                            linkedPause = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (linkedPause) {
+                    break;
+                }
+            }
+
+            sourceBe.setLinkedPause(linkedPause);
+
+            boolean shouldPause = playerTooClose || sourceBe.isLinkedPause();
+
+            if (shouldPause && !sourceBe.isPauseUsed()) {
+                if (sourceBe.getPausedTicks() < 600) {
+                    sourceBe.incrementPausedTicks();
+                    sourceBe.resetTickCounter();
+                    return;
+                } else {
+                    sourceBe.setPauseUsed(true);
+                }
+            }
+
+            if (!shouldPause) {
+                if (sourceBe.getPausedTicks() > 0) {
+                    sourceBe.resetPausedTicks();
+                }
+                if (sourceBe.isPauseUsed()) {
+                    sourceBe.setPauseUsed(false);
+                }
+            }
+
             if (sourceBe.getTickCounter() >= riseDelay) {
                 sourceBe.resetTickCounter();
+                sourceBe.resetPausedTicks();
 
-                int radius = 8;
-                BlockPos center = new BlockPos(p.getX(), p.getY() + sourceBe.getCurrentLayer(), p.getZ());
+                radius = 8;
+                center = new BlockPos(p.getX(), p.getY() + sourceBe.getCurrentLayer(), p.getZ());
 
                 // stopper check on the next layer
                 boolean touchedStopper = false;
